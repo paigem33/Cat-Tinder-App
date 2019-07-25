@@ -1,0 +1,9 @@
+#cats-display {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  margin: 0 40px;
+}
+#cats-display .card{
+  width: 300px;
+}
