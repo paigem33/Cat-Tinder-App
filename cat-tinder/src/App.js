@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
-
+import { getCats } from './api'
 import Header from './Header'
 import Home from './pages/Home'
 import Cats from './pages/Cats'
@@ -11,33 +11,23 @@ export default class App extends Component {
   constructor(props){
     super(props)
       this.state = {
-       cats: [
-        {
-          id: 1,
-          name: 'Morris',
-          age: 2,
-          enjoys: "Long walks on the beach."
-        },
-        {
-          id: 2,
-          name: 'Paws',
-          age: 4,
-          enjoys: "Snuggling by the fire."
-        },
-        {
-          id: 3,
-          name: 'Mr. Meowsalot',
-          age: 12,
-          enjoys: "Being in charge."
-        }
-        ]
+       cats: []
       }
   }
   
 handleNewCat = (e) => {
   console.log(e)
 }
-  
+
+componentDidMount() {
+  getCats()
+	.then(APIcats => {
+	  this.setState({
+		cats: APIcats
+	  })
+	})
+}
+
   render() {
     return (
       <div>
