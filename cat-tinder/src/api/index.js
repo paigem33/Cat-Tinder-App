@@ -1,6 +1,6 @@
 // the address of our rails backend, saved as a constant value, because we never want to accidentally change it
 // Cloud9 users: This will be your IP address found under the 'Share' link
-const BASE = 'http://18.191.251.246:8080'
+const BASE = 'http://localhost:3000'
 
 let getCats = function() {
 // the function name getCats is intended to remind you of the restful rails route --> GET '/cats'.
