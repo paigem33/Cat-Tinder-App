@@ -1,22 +1,39 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
-import { getCats } from './api'
+import { getCats, createCat, deleteCat } from './api'
 import Header from './Header'
 import Home from './pages/Home'
 import Cats from './pages/Cats'
 import NewCat from './pages/NewCat'
 import './App.css';
 
+
 export default class App extends Component {
   constructor(props){
     super(props)
       this.state = {
-       cats: []
+       cats: [],
+       success: false
       }
   }
-  
-handleNewCat = (e) => {
-  console.log(e)
+
+handleNewCat = (newCatInfo) => {
+    createCat(newCatInfo)
+    .then(successCat => {
+        if(typeof successCat.id == "number") {
+            console.log("Purrrfect! New cat: ", successCat)
+            this.setState({success: true})
+            window.location.reload()
+        }
+    })
+}
+
+handleDelete = (id) => {
+    deleteCat(id)
+    .then(successDelete => {
+        console.log(id + " is outta here")
+        window.location.reload()
+    })
 }
 
 componentDidMount() {
@@ -48,13 +65,13 @@ componentDidMount() {
            <Header />
           <Switch>
             <Route exact path="/" component={Home} />
-            <Route exact path="/cats" render={(props) => <Cats cats={this.state.cats}/> }/>
-            <Route exact path="/newcat" render={(props) => <NewCat handleNewCat={this.handleNewCat}/>}/>
+            <Route exact path="/cats" render={(props) => <Cats cats={this.state.cats} delete={this.handleDelete}/> }/>
+            <Route exact path="/newcat" render={(props) => <NewCat handleNewCat={this.handleNewCat} success={this.state.success}/>}/>
           </Switch>
         </Router>
-        
-       
-        
+
+
+
       </div>
       )
   }

@@ -8,18 +8,34 @@ import ListGroup from 'react-bootstrap/ListGroup';
 
 import '../App.css';
 
+
 export default class Cats extends Component {
+
+    handleDeleteCat = (id) => {
+        this.props.delete(id)
+    }
+
+    matched = (name) => {
+        alert('You matched with ' + name + '!')
+        // match.classList.add('matched')
+    }
+
   render() {
     return (
       <div id="cats-display">
             {this.props.cats.map((cat, index) =>{
               return (
                   <div class="card text-white bg-info mb-3">
-                    <div class="card-header">Name: {cat.name}</div>
+                  <button type="button" class="close onRight" data-dismiss="modal" aria-label="Close" onClick={(e) => this.handleDeleteCat(cat.id)}>
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                    <div class="card-header catName">{cat.name}</div>
                     <div class="card-body">
                       <h4 class="card-title">Age: {cat.age}</h4>
-                      <p class="card-text">About: {cat.enjoys}</p>
+                      <p class="card-text">Enjoys: {cat.enjoys}</p>
                     </div>
+                    <button name={cat.name} type="button" class="btn btn-secondary onTheRight" onClick={(e) => this.matched(cat.name)}>Match</button>
+
                   </div>
                 )
               })}
@@ -34,9 +50,9 @@ export default class Cats extends Component {
 //                   </h4>
 //                     <span className='cat-enjoys'>{cat.enjoys}</span>
 //                   </ListGroup.Item>
-                  
-                  
-                  
+
+
+
 // <div class="card text-white bg-info mb-3" style="max-width: 20rem;">
 //   <div class="card-header">Header</div>
 //   <div class="card-body">

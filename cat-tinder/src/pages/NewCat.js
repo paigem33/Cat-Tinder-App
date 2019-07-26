@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import { Form, FormGroup, ControlLabel, FormControl, Button } from "react-bootstrap";
+import { Redirect } from 'react-router'
 
 import '../App.css';
 
@@ -30,15 +31,15 @@ handleChange = (event) => {
 // someFn = () => {
 //         this.props.callbackFromParent({this.state.form});
 //     },
-handleClick = (e) => {
-  e.preventDefault()
+handleClick = (newCatInfo) => {
+  newCatInfo.preventDefault()
   this.props.handleNewCat(this.state.form)
 }
 
   render() {
     const { form } = this.state
     return (
-      <div class="m-3">
+      <div class="m-3 addCatForm">
       <Form>
             <Form.Group controlId="name" >
               <Form.Label id="name" label="name" >Name</Form.Label>
@@ -47,6 +48,7 @@ handleClick = (e) => {
             <Form.Group controlId="exampleForm.ControlSelect1">
               <Form.Label id="age" label="age" >Age</Form.Label>
               <Form.Control as="select" onChange={this.handleChange} name="age">
+                <option>Select</option>
                 <option>1</option>
                 <option>2</option>
                 <option>3</option>
@@ -72,9 +74,10 @@ handleClick = (e) => {
               Create Cat Profile
             </Button>
           </Form>
+          {this.props.success && <Redirect exact to="/cats" />}
         </div>
       )
   }
-  
+
 
 }

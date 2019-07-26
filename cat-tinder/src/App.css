@@ -7,3 +7,21 @@
 #cats-display .card{
   width: 300px;
 }
+.onRight{
+margin-left: 260px;
+width: 50px;
+font-size: 20px;
+}
+.catName {
+    font-size: 25px;
+    border-top: solid 1px rgba(0,0,0,0.125)
+}
+.homePage {
+    padding-left: 40px;
+}
+.match {
+    color: red;
+}
+.addCatForm {
+    max-width: 450px;
+}
